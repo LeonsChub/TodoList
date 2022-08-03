@@ -1,0 +1,25 @@
+{
+  "name": "todolist",
+  "version": "1.0.0",
+  "description": "",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack",
+    "watch": "webpack -watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LeonsChub/TodoList.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LeonsChub/TodoList/issues"
+  },
+  "homepage": "https://github.com/LeonsChub/TodoList#readme",
+  "devDependencies": {
+    "webpack-cli": "^4.10.0"
+  }
+}
