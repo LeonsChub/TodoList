@@ -1,6 +1,14 @@
 import {createTodo} from "./todoItem.js" 
+import { loadMainAssests, loadTodo } from "./load.js";
 import css from "./style.css"
 
-let todo = createTodo("feed jimmy","Gotta feed my dog ideally before he dies","23/04/2023",5);
-console.log(todo.toString());
+let todo = createTodo("Feed jimmy","jimmy the dog will die if I dont feed him :( Lol","25/04/2022",3);
+
+loadMainAssests();
+
+loadTodo(todo);
+loadTodo(todo);
+loadTodo(todo);
+loadTodo(todo);
+loadTodo(todo);
 

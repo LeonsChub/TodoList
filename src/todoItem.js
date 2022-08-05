@@ -11,12 +11,17 @@ const createTodo = (title, description, due, priority)=>{
     const getPriority = ()=>{
         return priority;
     };
+    const returnTodo = ()=>{
+        return {title,description,due,priority};
+    };
     const toString = ()=>{
         return `${priority} ${title}         ${due} \n ${description}`
     };
 
-    return {getTitle, getDescription,getDueDate,getPriority,toString};
+    return {getTitle, getDescription,getDueDate,getPriority,toString,returnTodo};
 }
 
-
-export {createTodo};
+const copy = (ToDo)=>{
+    return createTodo(ToDo.getTitle(),ToDo.getDescription(),ToDo.getDueDate(),ToDo.getPriority());
+};
+export {createTodo,copy};
