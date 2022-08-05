@@ -1,4 +1,6 @@
 const createTodo = (title, description, due, priority)=>{
+    let done = false;
+
     const getTitle = ()=>{
         return title;
     };
@@ -11,14 +13,17 @@ const createTodo = (title, description, due, priority)=>{
     const getPriority = ()=>{
         return priority;
     };
+    const isDone = ()=>{
+        return done;
+    }
     const returnTodo = ()=>{
-        return {title,description,due,priority};
+        return {title,description,due,priority,done};
     };
     const toString = ()=>{
         return `${priority} ${title}         ${due} \n ${description}`
     };
 
-    return {getTitle, getDescription,getDueDate,getPriority,toString,returnTodo};
+    return {getTitle, getDescription,getDueDate,getPriority,toString,returnTodo,isDone};
 }
 
 const copy = (ToDo)=>{
