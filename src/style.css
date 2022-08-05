@@ -68,8 +68,6 @@ table {
     --cyan-500:#00bcd4;
     --cyan-600:#00acc1;
 }
-
-
 #content{
     width: 100%;
     height: 100vh;
@@ -130,4 +128,18 @@ table {
     border: 3px solid var(--cyan-600);
     border-radius: 6px;
     margin-right: 16px;
+}
+.todo > .title{
+    margin-right: auto;
+}
+.todo > .date,
+.todo > .expand,
+.todo > .edit{
+    margin-right: 24px;
+}
+.todo > .trash:hover,
+.todo > .expand:hover,
+.todo > .complete   :hover,
+.todo > .edit:hover{
+    cursor: pointer;
 }

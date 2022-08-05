@@ -62,10 +62,34 @@ function loadTodo(todo){
     checkBox.classList.add("complete");
     
     let title = document.createElement("h2");
+    title.classList.add("title");
     title.textContent = todo.getTitle();
+
+    let date = document.createElement("h3");
+    date.classList.add("date");
+    date.textContent = todo.getDueDate();
+
+    let expand = document.createElement("img");
+    expand.classList.add("expand");
+    expand.setAttribute("width","24px");
+    expand.setAttribute("src","../src/images/expand.svg");
+
+    let edit = document.createElement("img");
+    edit.classList.add("edit");
+    edit.setAttribute("width","24px");
+    edit.setAttribute("src","../src/images/edit.svg");
+
+    let trash = document.createElement("img");
+    trash.classList.add("trash");
+    trash.setAttribute("width","24px");
+    trash.setAttribute("src","../src/images/trash.svg");
 
     toDoDiv.append(checkBox);
     toDoDiv.append(title);
+    toDoDiv.append(date);
+    toDoDiv.append(expand);
+    toDoDiv.append(edit);
+    toDoDiv.append(trash);
 
     content.appendChild(toDoDiv);
 }   
