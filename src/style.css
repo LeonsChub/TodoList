@@ -1,0 +1,94 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=PT+Sans:wght@700&display=swap');
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+#content{
+    font-size: 1.5em;
+    display: grid;
+
+    grid-template-columns: 1fr 6fr;
+    grid-template-rows: 1fr 6fr;
+    grid-template-areas: "logo    logo" 
+                        " sidebar main";
+
+}
+:root{
+    --cyan-50:#e0f7fa;
+    --cyan-100:#b2ebf2;
+    --cyan-200:#80deea;
+    --cyan-300:#4dd0e1;
+    --cyan-400:#26c6da;
+    --cyan-500:#00bcd4;
+    --cyan-600:#00acc1;
+}
+
+
+#content{
+    width: 100%;
+    height: 100vh;
+}
+.logo-wrap{
+    grid-area: logo;
+    background-color: var(--cyan-300);
+    display: flex;
+    align-items: center;
+}
+.logo{
+    font-family: 'PT Sans', sans-serif;
+    font-size: 2.5em;
+    margin-left: 16px;
+}
+
+.sidebar{
+    grid-area: sidebar;
+    background-color: var(--cyan-100);
+}
+.main-content{
+    grid-area: main;
+}
