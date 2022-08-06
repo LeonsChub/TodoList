@@ -102,38 +102,6 @@ function loadTodo(todo){
 }
 
 function loadForm(){
-    /*<div class="form-popup" id="myForm">
-            <form class="form-container" novalidate>
-                    <h2>add book</h2>
-                    
-                    <ul>
-                        <li>
-                            <label for="bookName"><b>name:</b></label>
-                            <input type="text" placeholder="Book Name" name="bookName" required>
-                        </li>
-
-                        <li>
-                            <label for="bookAuthor"><b>Author:</b></label>
-                            <input type="text" placeholder="Author" name="bookAuthor" required>
-                        </li>
-
-                        <li>
-                            <label for="bookPageCount"><b>Pages: </b></label>
-                            <input type="number" name="bookPageCount" min="1" required>
-                        </li>
-
-                        <li>
-                            <label for="bookRead">Have you read the book?</label>
-                            <input type="checkbox" name="bookRead" >
-                        </li>
-                    </ul>
-            </form>
-
-            <div class="btnWrap">
-                <button class = "submitBtn">Submit</button>
-                <button onclick="closeForm()" class="cancel">cancel</button>
-            </div>
-        </div> */
 
     let formWrap = document.createElement("div");
     formWrap.id = "myForm";
@@ -161,6 +129,7 @@ function loadForm(){
     form.appendChild(list);
 
     let listItem = document.createElement("li");
+    listItem.classList.add("text-field");
     let titleInput = document.createElement("input");
     titleInput.id = "new-title";
     titleInput.setAttribute("type","text");
@@ -168,14 +137,77 @@ function loadForm(){
     listItem.appendChild(titleInput);
     list.appendChild(listItem);
 
-    listItem = document.createElement("li");
     let descriptionInput = document.createElement("textarea");
     descriptionInput.id = "new-description";
     descriptionInput.setAttribute("placeholder","Description...");
     listItem.appendChild(descriptionInput);
     list.appendChild(listItem);
 
+    listItem = document.createElement("li");
+    listItem.classList.add("picker-field");
+
+    let dateLabel = document.createElement("label");
+    dateLabel.setAttribute("for","create-form-date");
+    dateLabel.textContent = "Due Date:";
+    let dateInput = document.createElement("input");
+    dateInput.setAttribute("name","create-form-date");
+    dateInput.id = "new-date";
+    dateInput.setAttribute("type","date");
+
+    let simpleDiv = document.createElement("div");
+
+    simpleDiv.appendChild(dateLabel);
+    simpleDiv.appendChild(dateInput);
+
+    listItem.appendChild(simpleDiv);
+    
+    let priorityLabel = document.createElement("label");
+    priorityLabel.setAttribute("for","create-form-priority");
+    priorityLabel.textContent = "priority:";
+    let priorityInput = document.createElement("select");
+    priorityInput.setAttribute("name","create-form-priority");
+    priorityInput.id = "new-priority";
+
+    let priorityOption = document.createElement("option");
+    priorityOption.textContent = "low";
+    priorityOption.setAttribute("value","low");
+    priorityInput.appendChild(priorityOption);
+
+    priorityOption = document.createElement("option");
+    priorityOption.textContent = "medium";
+    priorityOption.setAttribute("value","medium");
+    priorityInput.appendChild(priorityOption);
+
+    priorityOption = document.createElement("option");
+    priorityOption.textContent = "high";
+    priorityOption.setAttribute("value","high");
+    priorityInput.appendChild(priorityOption);
+
+    simpleDiv = document.createElement("div");
+
+    simpleDiv.appendChild(priorityLabel);
+    simpleDiv.appendChild(priorityInput);
+
+    listItem.appendChild(simpleDiv);
+
+    list.appendChild(listItem);
+
+    let submitBtn = document.createElement("button");
+    submitBtn.id = "submit";
+    submitBtn.textContent = "Add Task";
+
+    formWrap.appendChild(submitBtn);
+
+    formWrap.style.display = "none";
+    
     anchorDiv.appendChild(formWrap);
+
+}
+function openForm(){
+    document.querySelector("#myForm").style.display = "block";
+}
+function closeForm(){
+    document.querySelector("#myForm").style.display = "none";
 }
 
-export {loadMainAssests, loadTodo}
+export {loadMainAssests, loadTodo, openForm, closeForm}  

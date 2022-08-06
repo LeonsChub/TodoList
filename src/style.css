@@ -151,7 +151,9 @@ button:focus {
 .todo > .trash:hover,
 .todo > .expand:hover,
 .todo > .complete:hover,
-.todo > .edit:hover{
+.todo > .edit:hover,
+img.close,
+button#submit{
     cursor: pointer;
 }
 .sidebar{
@@ -195,9 +197,21 @@ button:focus {
     background-color: white;
     border: 1px solid rgb(0, 0, 0);
 
-    width: 60%;
-    height: 50%;
+    max-width: 600px;
+    max-height: 370px;
     
+    border-radius: 16px;
+    
+}
+.form-container{
+    height: calc(100% - 1.5em - 8px);
+}
+#myForm ul{
+    display: flex;
+    flex-flow: column;
+    height: 100%;
+
+    justify-content: space-between;
 }
 #new-title{
     width: 95%;
@@ -210,16 +224,42 @@ button:focus {
     font-size: 1em;
     width: 95%;
 
-    margin-top: 16px;
-
-    height: 200px;
+    height: 6em;
     resize: none;
     border: none;
 }
 #myForm>.title{
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding-inline: 3%;
     background-color: var(--cyan-400);
+    height: 1.5em;
+}
+#myForm > .title > img.close{
+    width: 16px;
+}
+
+li.picker-field{
+    width: 95%;
+    margin-inline: auto;   
+    display: flex;
+    flex-flow: column;
+
+    align-items: flex-start;
+
+}
+
+#submit{
+    position: absolute;
+    bottom: 8px;
+    right: calc(5%);
+    border: none;
+    font-size: 0.75em;
+    background-color: var(--cyan-500);
+    color: white;
+    padding: 0.5em;
+    border-radius: 0.25em;
 }
