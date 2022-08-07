@@ -6,6 +6,7 @@ import css from "./style.css"
 loadMainAssests();
 
 let form = document.querySelector(".form-container");
+let main = document.querySelector(".main-content");
 let proj = createProject("general");
 
 document.querySelector("div.add").addEventListener("click", ()=>{
@@ -30,6 +31,7 @@ document.querySelector("button#submit").addEventListener("click", ()=>{
         proj.addTodo(todo);
         console.log(proj.toString());
 
+        main.innerHTML = "";
         loadProject(proj);
     }
 
