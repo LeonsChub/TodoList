@@ -1,10 +1,12 @@
 import {createTodo} from "./todoItem.js" 
-import { loadMainAssests, loadTodo,openForm ,closeForm} from "./load.js";
+import { createProject } from "./projects.js";
+import { loadMainAssests, loadTodo,openForm ,closeForm, loadProject} from "./load.js";
 import css from "./style.css"
 
-let todo = createTodo("Feed jimmy","jimmy the dog will die if I dont feed him :( Lol","25/04/2022",3);
-console.log(todo.isDone());
 loadMainAssests();
+
+let form = document.querySelector(".form-container");
+let proj = createProject("general");
 
 document.querySelector("div.add").addEventListener("click", ()=>{
     openForm();
@@ -15,10 +17,27 @@ document.querySelector("img.close").addEventListener("click", ()=>{
 });
 
 document.querySelector("button#submit").addEventListener("click", ()=>{
+
+    if(form["create-form-title"].value === "" || form["create-form-description"].value === "" || form["create-form-date"].value === ""){
+        alert("Please fill out Title Description and Due date.");
+    }
+    else{
+        let todo = createTodo(form["create-form-title"].value,
+                   form["create-form-description"].value,
+                   form["create-form-date"].value,
+                   form["create-form-priority"].value);
+        
+        proj.addTodo(todo);
+        console.log(proj.toString());
+
+        loadProject(proj);
+    }
+
     closeForm();
+
+    form["create-form-title"].value = "";
+    form["create-form-description"].value = "";
+    form["create-form-date"].value = "";
+    form["create-form-priority"].value = "1";
 });
-
-
-loadTodo(todo);
-
 

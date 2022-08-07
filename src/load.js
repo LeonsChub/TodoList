@@ -1,4 +1,5 @@
 import {copy, createTodo} from "./todoItem";
+import { createProject } from "./projects";
 
 if(!!document.querySelector("#content") === false){
     var anchorDiv = document.createElement("div");
@@ -133,6 +134,7 @@ function loadForm(){
     let titleInput = document.createElement("input");
     titleInput.id = "new-title";
     titleInput.setAttribute("type","text");
+    titleInput.setAttribute("name","create-form-title");
     titleInput.setAttribute("placeholder","Title: (example: Walk the dog)");
     listItem.appendChild(titleInput);
     list.appendChild(listItem);
@@ -140,6 +142,7 @@ function loadForm(){
     let descriptionInput = document.createElement("textarea");
     descriptionInput.id = "new-description";
     descriptionInput.setAttribute("placeholder","Description...");
+    descriptionInput.setAttribute("name","create-form-description");
     listItem.appendChild(descriptionInput);
     list.appendChild(listItem);
 
@@ -170,17 +173,17 @@ function loadForm(){
 
     let priorityOption = document.createElement("option");
     priorityOption.textContent = "low";
-    priorityOption.setAttribute("value","low");
+    priorityOption.setAttribute("value","1");
     priorityInput.appendChild(priorityOption);
 
     priorityOption = document.createElement("option");
     priorityOption.textContent = "medium";
-    priorityOption.setAttribute("value","medium");
+    priorityOption.setAttribute("value","2");
     priorityInput.appendChild(priorityOption);
 
     priorityOption = document.createElement("option");
     priorityOption.textContent = "high";
-    priorityOption.setAttribute("value","high");
+    priorityOption.setAttribute("value","3");
     priorityInput.appendChild(priorityOption);
 
     simpleDiv = document.createElement("div");
@@ -203,11 +206,20 @@ function loadForm(){
     anchorDiv.appendChild(formWrap);
 
 }
+
 function openForm(){
     document.querySelector("#myForm").style.display = "block";
 }
+
 function closeForm(){
     document.querySelector("#myForm").style.display = "none";
 }
 
-export {loadMainAssests, loadTodo, openForm, closeForm}  
+function loadProject(proj){
+    let array = proj.returnAll();
+    array.forEach(p => {
+        loadTodo(p);
+    });
+}
+
+export {loadMainAssests, loadTodo, openForm, closeForm, loadProject}  
