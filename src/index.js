@@ -1,6 +1,6 @@
 import {createTodo} from "./todoItem.js" 
 import { createProject } from "./projects.js";
-import { loadMainAssests, loadTodo,openForm ,closeForm, loadProject, globalEventListenerAdder} from "./load.js";
+import { loadMainAssests, loadTodo,openForm ,closeForm, loadProject, trashEventAdder,checkEventAdder} from "./load.js";
 import css from "./style.css"
 
 loadMainAssests();
@@ -20,8 +20,6 @@ dodo = createTodo("SSS3","SSS","SSS",3);
 proj.addTodo(dodo);
 
 loadProject(proj);
-
-globalEventListenerAdder(proj);
 
 document.querySelector("div.add").addEventListener("click", ()=>{
     openForm();

@@ -227,18 +227,40 @@ function loadProject(proj){
         const p = array[index];
         loadTodo(p,index);
     }
-    globalEventListenerAdder(proj);
+    checkEventAdder();
+    trashEventAdder(proj);
+    
 }
 
-const globalEventListenerAdder = (proj) =>{
+const trashEventAdder = (proj) =>{
     let trashBtns = document.querySelectorAll(".trash");
     trashBtns.forEach(element => {
         element.addEventListener("click", ()=>{
+
             let i = element.closest(".todo").getAttribute("index");
             proj.removeTodo(i);
             loadProject(proj);
+            
         });
     });
 }
 
-export {loadMainAssests, loadTodo, openForm, closeForm, loadProject, globalEventListenerAdder}  
+const checkEventAdder = () =>{
+    console.log("adding checklistener");
+    let trashBtns = document.querySelectorAll(".complete");
+    trashBtns.forEach(element => {
+        element.addEventListener("click", ()=>{
+            let domTitle = element.closest(".todo").childNodes[1];
+
+            if (element.classList.contains("checked")) {
+                domTitle.classList.remove("checked");
+                element.classList.remove("checked");
+            } else {
+                element.classList.add("checked");
+                domTitle.classList.add("checked");
+            }
+        });
+    });
+}
+
+export {loadMainAssests, loadTodo, openForm, closeForm, loadProject, trashEventAdder,checkEventAdder}  

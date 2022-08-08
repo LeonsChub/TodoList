@@ -152,6 +152,14 @@ textarea{
     border-radius: 6px;
     margin-right: 16px;
 }
+
+.complete.checked{
+    background-color: var(--cyan-500);
+}
+.todo > .title.checked{
+    text-decoration:line-through;
+    color: gray;
+}
 .todo > .title{
     margin-right: auto;
 }
