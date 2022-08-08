@@ -1,13 +1,27 @@
 import {createTodo} from "./todoItem.js" 
 import { createProject } from "./projects.js";
-import { loadMainAssests, loadTodo,openForm ,closeForm, loadProject} from "./load.js";
+import { loadMainAssests, loadTodo,openForm ,closeForm, loadProject, globalEventListenerAdder} from "./load.js";
 import css from "./style.css"
 
 loadMainAssests();
 
 let form = document.querySelector(".form-container");
 let main = document.querySelector(".main-content");
+
 let proj = createProject("general");
+
+let dodo = createTodo("SSS1","SSS","SSS",1);
+proj.addTodo(dodo);
+
+dodo = createTodo("SSS2","SSS","SSS",2);
+proj.addTodo(dodo);
+
+dodo = createTodo("SSS3","SSS","SSS",3);
+proj.addTodo(dodo);
+
+loadProject(proj);
+
+globalEventListenerAdder(proj);
 
 document.querySelector("div.add").addEventListener("click", ()=>{
     openForm();
@@ -31,7 +45,6 @@ document.querySelector("button#submit").addEventListener("click", ()=>{
         proj.addTodo(todo);
         console.log(proj.toString());
 
-        main.innerHTML = "";
         loadProject(proj);
     }
 
@@ -42,4 +55,3 @@ document.querySelector("button#submit").addEventListener("click", ()=>{
     form["create-form-date"].value = "";
     form["create-form-priority"].value = "1";
 });
-

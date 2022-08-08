@@ -132,9 +132,18 @@ textarea{
 
     border-top-right-radius: 12px;
     border-bottom-right-radius: 12px;
-
-    border-left: 6px solid rebeccapurple;
 }
+
+.todo[priority = "1"]{
+    border-left: 3px solid green;
+}
+.todo[priority = "2"]{
+    border-left: 3px solid yellow;
+}
+.todo[priority = "3"]{
+    border-left: 3px solid red;
+}
+
 .complete{
     width: calc(1em - 6px);
     height: calc(1em - 6px);

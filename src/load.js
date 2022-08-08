@@ -60,10 +60,12 @@ function loadMainAssests(){
     loadForm()
 }
 
-function loadTodo(todo){
+function loadTodo(todo,index){
     let content = document.querySelector(".main-content");
 
     let toDoDiv = document.createElement("div");
+    toDoDiv.setAttribute("priority",todo.getPriority());
+    toDoDiv.setAttribute("index",index);
     toDoDiv.classList.add("todo");
 
     let checkBox = document.createElement("div");
@@ -91,6 +93,7 @@ function loadTodo(todo){
     trash.classList.add("trash");
     trash.setAttribute("width","24px");
     trash.setAttribute("src","../src/images/trash.svg");
+
 
     toDoDiv.append(checkBox);
     toDoDiv.append(title);
@@ -135,6 +138,7 @@ function loadForm(){
     titleInput.id = "new-title";
     titleInput.setAttribute("type","text");
     titleInput.setAttribute("name","create-form-title");
+    titleInput.setAttribute("maxlength","30");
     titleInput.setAttribute("placeholder","Title: (example: Walk the dog)");
     listItem.appendChild(titleInput);
     list.appendChild(listItem);
@@ -216,10 +220,25 @@ function closeForm(){
 }
 
 function loadProject(proj){
+    let content = document.querySelector(".main-content");
+    content.innerHTML = "";
     let array = proj.returnAll();
-    array.forEach(p => {
-        loadTodo(p);
+    for (let index = 0; index < array.length; index++) {
+        const p = array[index];
+        loadTodo(p,index);
+    }
+    globalEventListenerAdder(proj);
+}
+
+const globalEventListenerAdder = (proj) =>{
+    let trashBtns = document.querySelectorAll(".trash");
+    trashBtns.forEach(element => {
+        element.addEventListener("click", ()=>{
+            let i = element.closest(".todo").getAttribute("index");
+            proj.removeTodo(i);
+            loadProject(proj);
+        });
     });
 }
 
-export {loadMainAssests, loadTodo, openForm, closeForm, loadProject}  
+export {loadMainAssests, loadTodo, openForm, closeForm, loadProject, globalEventListenerAdder}  
