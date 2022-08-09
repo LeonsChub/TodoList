@@ -26,23 +26,61 @@ function loadMainAssests(){
     logoWrap.appendChild(logo);
     anchorDiv.appendChild(logoWrap);
 
-
-
     let sidebar = document.createElement('div');
     sidebar.classList.add("sidebar");
 
     let sidebarList = document.createElement('ul');
 
     let listElem = document.createElement("li");
-    listElem.textContent = "Home";
+    let btnHome = document.createElement("button");
+    btnHome.textContent = "home";
+    listElem.appendChild(btnHome);
+    
     sidebarList.appendChild(listElem);
 
     listElem = document.createElement("li");
-    listElem.textContent = "Today";
+    listElem.textContent = "Projects";
     sidebarList.appendChild(listElem);
 
     listElem = document.createElement("li");
-    listElem.textContent = "Week";
+
+    let addProjectWrap = document.createElement("div");
+    addProjectWrap.id = "add-project";
+    addProjectWrap.style.display = "none";
+    
+    let addProjInput = document.createElement("input");
+    addProjInput.id = "project-add-name"
+    let btnDiv = document.createElement("div");
+    btnDiv.classList.add("btn-div");
+
+    let btn = document.createElement("button");
+    btn.id = "submit-proj";
+    btn.textContent = "ADD";
+    btnDiv.appendChild(btn);
+
+    btn = document.createElement("button");
+    btn.id = "cancel-proj";
+    btn.textContent = "CANCEL"
+    btn.addEventListener("click",()=>{
+        addProjectWrap.style.display = "none";
+    });
+    btnDiv.appendChild(btn);
+
+    addProjectWrap.appendChild(addProjInput);
+    addProjectWrap.appendChild(btnDiv);
+    
+    listElem.appendChild(addProjectWrap);
+    sidebarList.appendChild(listElem);
+
+    listElem = document.createElement("li");
+    let btnAddProject = document.createElement("button");
+    btnAddProject.textContent = "+ Add Project";
+
+    btnAddProject.addEventListener("click",()=>{
+        addProjectWrap.style.display = "block";
+    });
+
+    listElem.appendChild(btnAddProject);
     sidebarList.appendChild(listElem);
 
     let addTodo = document.createElement("div");
@@ -92,10 +130,16 @@ function loadTodo(todo,index){
     expand.setAttribute("width","24px");
     expand.setAttribute("src","../src/images/expand.svg");
 
+    expand.addEventListener("click",()=>{
+        loadExpandWindow(todo);
+    });
+
     let edit = document.createElement("img");
     edit.classList.add("edit");
     edit.setAttribute("width","24px");
     edit.setAttribute("src","../src/images/edit.svg");
+
+    
 
     let trash = document.createElement("img");
     trash.classList.add("trash");
@@ -222,30 +266,6 @@ function loadForm(){
         closeForm();
     });
     
-    submitBtn.addEventListener("click", ()=>{
-    
-        if(form["create-form-title"].value === "" || form["create-form-description"].value === "" || form["create-form-date"].value === ""){
-            alert("Please fill out Title Description and Due date.");
-        }
-        else{
-            let todo = createTodo(form["create-form-title"].value,
-                       form["create-form-description"].value,
-                       form["create-form-date"].value,
-                       form["create-form-priority"].value);
-            
-            proj.addTodo(todo);
-            console.log(proj.toString());
-    
-            loadProject(proj);
-        }
-    
-        closeForm();
-    
-        form["create-form-title"].value = "";
-        form["create-form-description"].value = "";
-        form["create-form-date"].value = "";
-        form["create-form-priority"].value = "1";
-    });
 
 }
 

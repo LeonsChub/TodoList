@@ -121,6 +121,46 @@ textarea{
 
     width: 80%;
 }
+.sidebar li > button{
+    border: none;
+    background-color: #0097a7;
+    width: 100%;
+
+    text-align: left;
+    font-size: 0.75em;
+    padding: 0.5em;
+    font-weight: 600;
+}
+#add-project{
+    width: 100%;
+    display: flex;
+    flex-flow: column;
+}
+.btn-div{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 8px;
+}
+#submit-proj{
+    background-color: rgb(62, 212, 62);
+}
+#cancel-proj{
+    background-color: rgb(229, 14, 14);
+}
+#project-add-name{
+    width: 97%;
+    font-size: 0.75em;
+}
+
+#submit-proj,
+#cancel-proj{
+    font-weight: 600;
+    width: 45%;
+    font-size: 0.75em;
+    border: none;
+    padding: 0.5em;
+    border-radius: 0.25em;
+}
 .todo:not(:last-child){
     margin-bottom: 0.5em;
 }
@@ -176,6 +216,7 @@ textarea{
 .todo > .complete:hover,
 .todo > .edit:hover,
 img.close,
+button:hover,
 button#submit{
     cursor: pointer;
 }
@@ -197,7 +238,6 @@ button#submit{
     height: 48px;
     
     display: flex;
-    align-items: center;
     justify-content: center;
 
 }
@@ -244,6 +284,9 @@ button#submit{
 
     border: none;
     margin-block: 8px;
+}
+#new-title:focus{
+    background-color: white;
 }
 #new-description{
     font-size: 1em;
