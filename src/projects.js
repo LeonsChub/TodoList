@@ -16,6 +16,9 @@ const createProject = (str)=>{
     const returnAll = ()=>{
         return projects;
     }
+    const todoAt =(index) =>{
+        return projects[index];
+    }
     const toString = ()=>{
         let str = "";
         projects.forEach(p => {
@@ -26,7 +29,7 @@ const createProject = (str)=>{
         return str;
     }
 
-    return{addTodo,removeTodo,toString,getName,returnAll}
+    return{addTodo,removeTodo,toString,getName,returnAll,todoAt}
 }
 
 export {createProject}

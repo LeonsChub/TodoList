@@ -1,55 +1,34 @@
 import {createTodo} from "./todoItem.js" 
 import { createProject } from "./projects.js";
-import { loadMainAssests, loadTodo,openForm ,closeForm, loadProject, trashEventAdder,checkEventAdder} from "./load.js";
+import { loadMainAssests,openForm ,closeForm, loadProject,loadExpandWindow} from "./load.js";
 import css from "./style.css"
 
 loadMainAssests();
 
 let form = document.querySelector(".form-container");
 let main = document.querySelector(".main-content");
-
 let proj = createProject("general");
 
-let dodo = createTodo("SSS1","SSS","SSS",1);
-proj.addTodo(dodo);
+let todo = createTodo("feed jimmy","feed Jimmy my lovable dog","23/12/12",1);
+proj.addTodo(todo);
 
-dodo = createTodo("SSS2","SSS","SSS",2);
-proj.addTodo(dodo);
+todo = createTodo("feed jimmy","feed Jimmy my lovable dog1","23/12/12",1);
+proj.addTodo(todo);
 
-dodo = createTodo("SSS3","SSS","SSS",3);
-proj.addTodo(dodo);
+todo = createTodo("feed jimmy","feed Jimmy my lovable dog2","23/12/12",2);
+proj.addTodo(todo);
+
+todo = createTodo("feed jimmy","feed Jimmy my lovable dog3","23/12/12",3);
+proj.addTodo(todo);
+
+todo = createTodo("feed jimmy","feed Jimmy my lovable dog4","23/12/12",1);
+proj.addTodo(todo);
+
+todo = createTodo("feed jimmy","feed Jimmy my lovable dog5","23/12/12",1);
+proj.addTodo(todo);
+
+todo = createTodo("feed jimmy","feed Jimmy my lovable dog6","23/12/12",1);
+proj.addTodo(todo);
+
 
 loadProject(proj);
-
-document.querySelector("div.add").addEventListener("click", ()=>{
-    openForm();
-});
-
-document.querySelector("img.close").addEventListener("click", ()=>{
-    closeForm();
-});
-
-document.querySelector("button#submit").addEventListener("click", ()=>{
-
-    if(form["create-form-title"].value === "" || form["create-form-description"].value === "" || form["create-form-date"].value === ""){
-        alert("Please fill out Title Description and Due date.");
-    }
-    else{
-        let todo = createTodo(form["create-form-title"].value,
-                   form["create-form-description"].value,
-                   form["create-form-date"].value,
-                   form["create-form-priority"].value);
-        
-        proj.addTodo(todo);
-        console.log(proj.toString());
-
-        loadProject(proj);
-    }
-
-    closeForm();
-
-    form["create-form-title"].value = "";
-    form["create-form-description"].value = "";
-    form["create-form-date"].value = "";
-    form["create-form-priority"].value = "1";
-});

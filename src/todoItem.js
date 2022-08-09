@@ -16,6 +16,9 @@ const createTodo = (title, description, due, priority)=>{
     const isDone = ()=>{
         return done;
     }
+    const switchDone = ()=>{
+        done = !done;
+    }
     const returnTodo = ()=>{
         return {title,description,due,priority,done};
     };
@@ -23,7 +26,7 @@ const createTodo = (title, description, due, priority)=>{
         return `${priority} ${title}         ${due} \n ${description}`
     };
 
-    return {getTitle, getDescription,getDueDate,getPriority,toString,returnTodo,isDone};
+    return {getTitle, getDescription,getDueDate,getPriority,toString,returnTodo,isDone,switchDone};
 }
 
 const copy = (ToDo)=>{

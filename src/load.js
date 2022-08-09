@@ -49,6 +49,10 @@ function loadMainAssests(){
     addTodo.classList.add("add");
     addTodo.textContent = "+";
 
+    addTodo.addEventListener("click", ()=>{
+        openForm();
+    });
+
     sidebar.appendChild(sidebarList);
     sidebar.appendChild(addTodo);
     anchorDiv.appendChild(sidebar);
@@ -57,7 +61,7 @@ function loadMainAssests(){
     main.classList.add("main-content");
     anchorDiv.appendChild(main);
 
-    loadForm()
+    loadForm();
 }
 
 function loadTodo(todo,index){
@@ -74,6 +78,10 @@ function loadTodo(todo,index){
     let title = document.createElement("h2");
     title.classList.add("title");
     title.textContent = todo.getTitle();
+    if (todo.isDone()) {
+        title.classList.add("checked");
+        checkBox.classList.add("checked");
+    }
 
     let date = document.createElement("h3");
     date.classList.add("date");
@@ -112,6 +120,7 @@ function loadForm(){
 
     let formTitle = document.createElement("div");
     formTitle.classList.add("title");
+    formWrap.classList.add("popup");
 
     let name = document.createElement("h3");
     name.textContent = "Add a to-do";
@@ -208,6 +217,35 @@ function loadForm(){
     formWrap.style.display = "none";
     
     anchorDiv.appendChild(formWrap);
+    
+    xBtn.addEventListener("click", ()=>{
+        closeForm();
+    });
+    
+    submitBtn.addEventListener("click", ()=>{
+    
+        if(form["create-form-title"].value === "" || form["create-form-description"].value === "" || form["create-form-date"].value === ""){
+            alert("Please fill out Title Description and Due date.");
+        }
+        else{
+            let todo = createTodo(form["create-form-title"].value,
+                       form["create-form-description"].value,
+                       form["create-form-date"].value,
+                       form["create-form-priority"].value);
+            
+            proj.addTodo(todo);
+            console.log(proj.toString());
+    
+            loadProject(proj);
+        }
+    
+        closeForm();
+    
+        form["create-form-title"].value = "";
+        form["create-form-description"].value = "";
+        form["create-form-date"].value = "";
+        form["create-form-priority"].value = "1";
+    });
 
 }
 
@@ -219,6 +257,10 @@ function closeForm(){
     document.querySelector("#myForm").style.display = "none";
 }
 
+function closeExpand(){
+    document.querySelector("#expandWindow").remove();
+}
+
 function loadProject(proj){
     let content = document.querySelector(".main-content");
     content.innerHTML = "";
@@ -227,7 +269,7 @@ function loadProject(proj){
         const p = array[index];
         loadTodo(p,index);
     }
-    checkEventAdder();
+    checkEventAdder(proj);
     trashEventAdder(proj);
     
 }
@@ -245,12 +287,14 @@ const trashEventAdder = (proj) =>{
     });
 }
 
-const checkEventAdder = () =>{
+const checkEventAdder = (proj) =>{
     console.log("adding checklistener");
     let trashBtns = document.querySelectorAll(".complete");
     trashBtns.forEach(element => {
         element.addEventListener("click", ()=>{
             let domTitle = element.closest(".todo").childNodes[1];
+            let i = element.closest(".todo").getAttribute("index");
+            proj.todoAt(i).switchDone();
 
             if (element.classList.contains("checked")) {
                 domTitle.classList.remove("checked");
@@ -263,4 +307,41 @@ const checkEventAdder = () =>{
     });
 }
 
-export {loadMainAssests, loadTodo, openForm, closeForm, loadProject, trashEventAdder,checkEventAdder}  
+const loadExpandWindow = (todo) =>{
+    let expandWrap = document.createElement("div");
+    expandWrap.id = "expandWindow";
+
+    let formTitle = document.createElement("div");
+    formTitle.classList.add("title");
+    expandWrap.classList.add("popup");
+
+    let name = document.createElement("h3");
+    name.textContent = todo.getTitle();
+    formTitle.appendChild(name);
+
+    let xBtn = document.createElement("img");
+    xBtn.classList.add("close");
+    xBtn.setAttribute("src","../src/images/close.svg");
+    formTitle.appendChild(xBtn);
+
+    xBtn.addEventListener("click",()=>{
+        closeExpand()
+    });
+
+
+    let descriptionContainer = document.createElement("div");
+    descriptionContainer.classList.add("form-container");
+
+    let description = document.createElement("p");
+    description.id = "expand-description";
+    description.textContent = todo.getDescription();
+
+    descriptionContainer.appendChild(description);
+
+    expandWrap.appendChild(formTitle);
+    expandWrap.appendChild(descriptionContainer);
+    
+    anchorDiv.appendChild(expandWrap);
+}
+
+export {loadMainAssests, loadTodo, openForm, closeForm, loadProject, trashEventAdder,checkEventAdder ,loadExpandWindow}  
