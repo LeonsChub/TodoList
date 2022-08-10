@@ -61,7 +61,7 @@ button:focus {
     display: grid;
 
     grid-template-columns: 1fr 4fr;
-    grid-template-rows: 1fr 6fr;
+    grid-template-rows: 1fr 4fr;
     grid-template-areas: "logo    logo" 
                         " sidebar main";
 
@@ -131,6 +131,18 @@ textarea{
     padding: 0.5em;
     font-weight: 600;
 }
+#project-list{
+    width: 100%;
+    
+    height: 200px;
+
+    overflow: scroll;
+    overflow-x: auto;
+    overflow-y: auto;
+}
+#projects-list > li{
+    font-size: 0.75em;
+}
 #add-project{
     width: 100%;
     display: flex;
@@ -150,6 +162,11 @@ textarea{
 #project-add-name{
     width: 97%;
     font-size: 0.75em;
+}
+.error{
+    color: red;
+    font-size: 0.6em;
+    padding-top: 0.4em;
 }
 
 #submit-proj,
@@ -239,6 +256,7 @@ button#submit{
     
     display: flex;
     justify-content: center;
+    align-items: center;
 
 }
 

@@ -1,27 +1,27 @@
 import { createTodo } from "./todoItem";
 
 const createProject = (str)=>{
-    let projects = [];
+    let todos = [];
     let name = str;
 
     const addTodo = (todo)=>{
-        projects.push(todo);
+        todos.push(todo);
     }
     const removeTodo = (index) =>{
-        projects.splice(index,1);
+        todos.splice(index,1);
     }
     const getName = ()=>{
         return name;
     }
     const returnAll = ()=>{
-        return projects;
+        return todos;
     }
     const todoAt =(index) =>{
-        return projects[index];
+        return todos[index];
     }
     const toString = ()=>{
         let str = "";
-        projects.forEach(p => {
+        todos.forEach(p => {
             str += p.getTitle();
             str += ", ";
         });
@@ -32,4 +32,32 @@ const createProject = (str)=>{
     return{addTodo,removeTodo,toString,getName,returnAll,todoAt}
 }
 
-export {createProject}
+const projectsManager = ()=>{
+    let projects = [];
+
+    const addProj = (proj)=>{
+        projects.push(proj);
+    }
+
+    const rmProj = (name) =>{
+        for (let index = 0; index < projects.length; index++) {
+            const proj = array[index];
+
+            if (proj.getName() === name) {
+                projects.splice(index,1);
+            }
+        }
+    }
+
+    const returnAll = ()=>{
+        return projects;
+    }
+
+    const returnMain = ()=>{
+        return projects[0];
+    }
+
+    return{addProj,rmProj,returnAll,returnMain}
+}
+
+export {createProject,projectsManager}

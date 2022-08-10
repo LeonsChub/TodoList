@@ -50,8 +50,14 @@ function loadMainAssests(){
     
     let addProjInput = document.createElement("input");
     addProjInput.id = "project-add-name"
+    addProjInput.setAttribute("maxlength","15");
     let btnDiv = document.createElement("div");
     btnDiv.classList.add("btn-div");
+
+    let errorMsg = document.createElement("p");
+    errorMsg.classList.add("error");
+    errorMsg.style.display = "none";
+    errorMsg.textContent = "Invalid value";
 
     let btn = document.createElement("button");
     btn.id = "submit-proj";
@@ -60,13 +66,16 @@ function loadMainAssests(){
 
     btn = document.createElement("button");
     btn.id = "cancel-proj";
-    btn.textContent = "CANCEL"
+    btn.textContent = "X"
     btn.addEventListener("click",()=>{
+        addProjInput.value = "";
         addProjectWrap.style.display = "none";
+        errorMsg.style.display= "none";
     });
     btnDiv.appendChild(btn);
 
     addProjectWrap.appendChild(addProjInput);
+    addProjectWrap.appendChild(errorMsg);
     addProjectWrap.appendChild(btnDiv);
     
     listElem.appendChild(addProjectWrap);
@@ -81,6 +90,12 @@ function loadMainAssests(){
     });
 
     listElem.appendChild(btnAddProject);
+    sidebarList.appendChild(listElem);
+
+    listElem = document.createElement("li");
+    let projectList = document.createElement("ul");
+    projectList.id = "project-list";
+    listElem.appendChild(projectList);
     sidebarList.appendChild(listElem);
 
     let addTodo = document.createElement("div");
@@ -364,4 +379,14 @@ const loadExpandWindow = (todo) =>{
     anchorDiv.appendChild(expandWrap);
 }
 
-export {loadMainAssests, loadTodo, openForm, closeForm, loadProject, trashEventAdder,checkEventAdder ,loadExpandWindow}  
+const reloadProjectList = (projects) =>{
+    let projectList = document.querySelector("#project-list");
+    projectList.innerHTML = "";
+    projects.forEach(element => {
+        let li = document.createElement("li");
+        li.textContent = element.getName();
+        projectList.append(li);
+    });
+}
+
+export {loadMainAssests, loadTodo, openForm, closeForm, loadProject, trashEventAdder,checkEventAdder ,loadExpandWindow,reloadProjectList}  
