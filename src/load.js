@@ -296,40 +296,44 @@ function closeExpand(){
     document.querySelector("#expandWindow").remove();
 }
 
-function loadProject(proj){
+function loadProject(projects,proj){
     let content = document.querySelector(".main-content");
     content.innerHTML = "";
-    let array = proj.returnAll();
-    for (let index = 0; index < array.length; index++) {
-        const p = array[index];
-        loadTodo(p,index);
+    let subProjectArray = proj.returnAll();
+    let mainProjArray = projects.returnMain().returnAll();
+    for (let index = 0; index < mainProjArray.length; index++) {
+        const p = mainProjArray[index];
+        if (subProjectArray.includes(p)) {
+            loadTodo(p,index);
+        }
+        
     }
-    checkEventAdder(proj);
-    trashEventAdder(proj);
+    checkEventAdder(projects,proj);
+    trashEventAdder(projects,proj);
     
 }
 
-const trashEventAdder = (proj) =>{
+const trashEventAdder = (projects,proj) =>{
     let trashBtns = document.querySelectorAll(".trash");
     trashBtns.forEach(element => {
         element.addEventListener("click", ()=>{
 
             let i = element.closest(".todo").getAttribute("index");
-            proj.removeTodo(i);
-            loadProject(proj);
+            projects.returnMain().removeTodo(i);
+            loadProject(projects,proj);
             
         });
     });
 }
 
-const checkEventAdder = (proj) =>{
+const checkEventAdder = (projects,proj) =>{
     console.log("adding checklistener");
     let trashBtns = document.querySelectorAll(".complete");
     trashBtns.forEach(element => {
         element.addEventListener("click", ()=>{
             let domTitle = element.closest(".todo").childNodes[1];
             let i = element.closest(".todo").getAttribute("index");
-            proj.todoAt(i).switchDone();
+            projects.returnMain().todoAt(i).switchDone();
 
             if (element.classList.contains("checked")) {
                 domTitle.classList.remove("checked");
@@ -390,7 +394,7 @@ const reloadProjectList = (projects) =>{
         projectList.append(li);
 
         button.addEventListener("click",()=>{
-            loadProject(projects.getProjByName(button.textContent));
+            loadProject(projects,projects.getProjByName(button.textContent));
         });
     });
 }
