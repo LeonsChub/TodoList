@@ -4,11 +4,21 @@ import { loadMainAssests,openForm ,closeForm, loadProject,loadExpandWindow, relo
 import css from "./style.css"
 
 let projects = projectsManager();
-let mainproj = createProject("general");
+let mainproj = createProject("General");
+let secondProj = createProject("zoomies");
 projects.addProj(mainproj);
+projects.addProj(secondProj);
+
+let todo1 = createTodo("buy milk","NEED TO BUT ALOTOFMILKIES :)","tomorrow SIKE",3);
+let todo2 = createTodo("buy zoomies","NEED TO BUT ALOTOFMILKIES :)","tomorrow SIKE",1);
+
+mainproj.addTodo(todo1);
+mainproj.addTodo(todo2);
+
+secondProj.addTodo(todo2);
 
 loadMainAssests();
-reloadProjectList(projects.returnAll());
+reloadProjectList(projects);
 
 let form = document.querySelector(".form-container");
 let main = document.querySelector(".main-content");

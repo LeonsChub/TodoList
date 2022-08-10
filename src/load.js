@@ -382,10 +382,16 @@ const loadExpandWindow = (todo) =>{
 const reloadProjectList = (projects) =>{
     let projectList = document.querySelector("#project-list");
     projectList.innerHTML = "";
-    projects.forEach(element => {
+    projects.returnAll().forEach(element => {
         let li = document.createElement("li");
-        li.textContent = element.getName();
+        let button = document.createElement("button");
+        button.textContent = element.getName();
+        li.append(button);
         projectList.append(li);
+
+        button.addEventListener("click",()=>{
+            loadProject(projects.getProjByName(button.textContent));
+        });
     });
 }
 
