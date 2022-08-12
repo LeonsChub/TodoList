@@ -48,6 +48,11 @@ const projectsManager = ()=>{
             }
         }
     }
+    
+    const getProjByIndex = (index)=>{
+        const p = projects[index];
+        return p; 
+    }
 
     const getProjByName = (name)=>{
         for (let index = 0; index < projects.length; index++) {
@@ -62,11 +67,15 @@ const projectsManager = ()=>{
         return projects;
     }
 
+    const length = ()=>{
+        return projects.length;
+    }
+
     const returnMain = ()=>{
         return projects[0];
     }
 
-    return{addProj,rmProj,returnAll,returnMain,getProjByName}
+    return{addProj,rmProj,returnAll,returnMain,getProjByName,length,getProjByIndex}
 }
 
 export {createProject,projectsManager}

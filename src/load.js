@@ -10,7 +10,7 @@ else{
     var anchorDiv = document.querySelector("#content"); 
 }
 
-function loadMainAssests(){
+function loadMainAssests(projects){
 
     let logoWrap = document.createElement("header");
     logoWrap.classList.add("logo-wrap");
@@ -114,7 +114,7 @@ function loadMainAssests(){
     main.classList.add("main-content");
     anchorDiv.appendChild(main);
 
-    loadForm();
+    loadForm(projects);
 }
 
 function loadTodo(todo,index){
@@ -172,7 +172,7 @@ function loadTodo(todo,index){
     content.appendChild(toDoDiv);
 }
 
-function loadForm(){
+function loadForm(projects){
 
     let formWrap = document.createElement("div");
     formWrap.id = "myForm";
@@ -262,6 +262,32 @@ function loadForm(){
 
     simpleDiv.appendChild(priorityLabel);
     simpleDiv.appendChild(priorityInput);
+
+    listItem.appendChild(simpleDiv);
+
+    list.appendChild(listItem);
+
+    let projectLabel = document.createElement("label");
+    projectLabel.setAttribute("for","create-form-priority");
+    projectLabel.textContent = "priority:";
+    let projectInput = document.createElement("select");
+    projectInput.setAttribute("name","create-form-priority");
+    projectInput.id = "new-priority";
+
+
+
+    for (let index = 0; index < projects.length(); index++) {
+        let Option = document.createElement("option");
+        Option.textContent = projects.getProjByIndex(index).getName();
+        Option.setAttribute("value","3");
+        projectInput.appendChild(Option);
+        
+    }
+
+    simpleDiv = document.createElement("div");
+    
+    simpleDiv.appendChild(projectLabel);
+    simpleDiv.appendChild(projectInput);
 
     listItem.appendChild(simpleDiv);
 

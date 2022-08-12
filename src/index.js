@@ -5,6 +5,17 @@ import css from "./style.css"
 
 let projects = projectsManager();
 let mainproj = createProject("General");
+projects.addProj(mainproj);
+
+mainproj = createProject("homework");
+projects.addProj(mainproj);
+
+mainproj = createProject("Chores");
+projects.addProj(mainproj);
+
+mainproj = createProject("Bills");
+projects.addProj(mainproj);
+
 /*let secondProj = createProject("Spring cleaning");
 let thirdProj = createProject("House renovation");
 projects.addProj(mainproj);
@@ -26,7 +37,7 @@ secondProj.addTodo(todo2);
 thirdProj.addTodo(todo3);
 thirdProj.addTodo(todo4);*/
 
-loadMainAssests();
+loadMainAssests(projects);
 reloadProjectList(projects);
 
 let form = document.querySelector(".form-container");
@@ -70,7 +81,7 @@ document.querySelector("#submit-proj").addEventListener("click",()=>{
 
         let projToadd = createProject(val);
         projects.addProj(projToadd);
-        reloadProjectList(projects.returnAll());
+        reloadProjectList(projects);
     }
 });
 
