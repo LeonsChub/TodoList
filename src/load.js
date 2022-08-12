@@ -268,18 +268,17 @@ function loadForm(projects){
     list.appendChild(listItem);
 
     let projectLabel = document.createElement("label");
-    projectLabel.setAttribute("for","create-form-priority");
-    projectLabel.textContent = "priority:";
+    projectLabel.setAttribute("for","create-form-poject");
+    projectLabel.textContent = "P   roject:";
     let projectInput = document.createElement("select");
-    projectInput.setAttribute("name","create-form-priority");
-    projectInput.id = "new-priority";
-
+    projectInput.setAttribute("name","create-form-poject");
+    projectInput.id = "new-poject";
 
 
     for (let index = 0; index < projects.length(); index++) {
         let Option = document.createElement("option");
         Option.textContent = projects.getProjByIndex(index).getName();
-        Option.setAttribute("value","3");
+        Option.setAttribute("value",`${projects.getProjByIndex(index).getName()}`);
         projectInput.appendChild(Option);
         
     }

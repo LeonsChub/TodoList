@@ -43,7 +43,7 @@ reloadProjectList(projects);
 let form = document.querySelector(".form-container");
 let main = document.querySelector(".main-content");
 
-
+console.log(form["create-form-project"].value);
 
 document.querySelector("#submit").addEventListener("click", ()=>{
     
