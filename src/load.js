@@ -62,6 +62,24 @@ function loadMainAssests(projects){
     let btn = document.createElement("button");
     btn.id = "submit-proj";
     btn.textContent = "ADD";
+    btn.addEventListener("click",()=>{
+        let val = document.querySelector("#project-add-name").value;
+        if (val.length < 2) {
+            document.querySelector("#add-project").childNodes[1].style.display = "block";
+        }
+        else{
+            document.querySelector("#project-add-name").value = "";
+            document.querySelector("#add-project").childNodes[1].style.display = "none";
+            document.querySelector("#add-project").style.display = "none";
+    
+            let projToadd = createProject(val);
+            projects.addProj(projToadd);
+            reloadProjectList(projects);
+    
+            document.querySelector("#myForm").remove();
+            loadForm(projects);
+        }
+    });
     btnDiv.appendChild(btn);
 
     btn = document.createElement("button");
@@ -269,9 +287,9 @@ function loadForm(projects){
 
     let projectLabel = document.createElement("label");
     projectLabel.setAttribute("for","create-form-poject");
-    projectLabel.textContent = "P   roject:";
+    projectLabel.textContent = "Project:";
     let projectInput = document.createElement("select");
-    projectInput.setAttribute("name","create-form-poject");
+    projectInput.setAttribute("name","create-form-project");
     projectInput.id = "new-poject";
 
 
@@ -295,6 +313,36 @@ function loadForm(projects){
     let submitBtn = document.createElement("button");
     submitBtn.id = "submit";
     submitBtn.textContent = "Add Task";
+
+    submitBtn.addEventListener("click", ()=>{
+        let form = document.querySelector(".form-container");
+        
+        if(form["create-form-title"].value === "" || form["create-form-description"].value === "" || form["create-form-date"].value === ""){
+            alert("Please fill out Title Description and Due date.");
+        }
+        else{
+            let todo = createTodo(form["create-form-title"].value,
+                       form["create-form-description"].value,
+                       form["create-form-date"].value,
+                       form["create-form-priority"].value);
+
+            if(form["create-form-project"].value !== "General"){
+                let projName = `${form["create-form-project"].value}`;
+                let proj = projects.getProjByName(projName);
+                proj.addTodo(todo);
+            }
+            projects.returnMain().addTodo(todo);
+            loadProject(projects,projects.returnMain());
+        }
+    
+        closeForm();
+    
+        form["create-form-title"].value = "";
+        form["create-form-description"].value = "";
+        form["create-form-date"].value = "";
+        form["create-form-priority"].value = "1";
+        form["create-form-project"].value = "General";
+    });
 
     formWrap.appendChild(submitBtn);
 
